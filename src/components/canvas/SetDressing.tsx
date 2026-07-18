@@ -4,6 +4,7 @@ import { Float, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
+import { withBasePath } from "@/lib/basePath";
 import { STATION, sectionProgress } from "@/lib/journey";
 import { scrollState } from "@/lib/scroll";
 import { makeGlowTexture, makeTextTexture } from "@/lib/textures";
@@ -15,10 +16,10 @@ import { makeGlowTexture, makeTextTexture } from "@/lib/textures";
  * corridor. They read as silhouettes, keeping the art style coherent.
  */
 
-useGLTF.preload("/models/astronaut.glb");
-useGLTF.preload("/models/spaceship.glb");
+useGLTF.preload(withBasePath("/models/astronaut.glb"));
+useGLTF.preload(withBasePath("/models/spaceship.glb"));
 // NASA IGOAL ISS — meshopt-compressed; drei decodes it built-in
-useGLTF.preload("/models/iss.glb");
+useGLTF.preload(withBasePath("/models/iss.glb"));
 
 /* Spaceship flyby path (world space) — stays far from the camera corridor */
 const SHIP_FROM = new THREE.Vector3(70, 18, -190);
@@ -50,7 +51,7 @@ function prepScene(scene: THREE.Group) {
 function Astronaut() {
   const groupRef = useRef<THREE.Group>(null);
   const inner = useRef<THREE.Group>(null);
-  const { scene } = useGLTF("/models/astronaut.glb");
+  const { scene } = useGLTF(withBasePath("/models/astronaut.glb"));
   const prepped = useMemo(() => prepScene(scene), [scene]);
 
   const glowMat = useMemo(
@@ -91,7 +92,7 @@ function Astronaut() {
 
 function ShipFlyby() {
   const groupRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF("/models/spaceship.glb");
+  const { scene } = useGLTF(withBasePath("/models/spaceship.glb"));
   const prepped = useMemo(() => prepScene(scene), [scene]);
 
   const { glowMat, trailMat } = useMemo(() => {
@@ -146,7 +147,7 @@ function ShipFlyby() {
 function WorkStation() {
   const groupRef = useRef<THREE.Group>(null);
   const spinRef = useRef<THREE.Group>(null);
-  const { scene: issScene } = useGLTF("/models/iss.glb");
+  const { scene: issScene } = useGLTF(withBasePath("/models/iss.glb"));
 
   // Compute the recenter offset without mutating or reparenting the GLTF
   // scene (both break under Strict Mode's double-invoked memos). The

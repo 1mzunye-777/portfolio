@@ -10,11 +10,12 @@ import {
   PROJECTS_RING_TILT,
   SKILLS_CENTER,
 } from "@/lib/journey";
+import { withBasePath } from "@/lib/basePath";
 import { scrollState } from "@/lib/scroll";
 import { makeGlowTexture } from "@/lib/textures";
 
-useTexture.preload("/textures/6k_stars_milky_way.webp");
-useTexture.preload("/textures/2k_moon.webp");
+useTexture.preload(withBasePath("/textures/6k_stars_milky_way.webp"));
+useTexture.preload(withBasePath("/textures/2k_moon.webp"));
 
 /**
  * SpaceEnvironment — the atmosphere of the whole voyage.
@@ -163,7 +164,7 @@ export default function SpaceEnvironment() {
 
   /* -------- Milky Way skybox (real panorama) -------- */
   const [milkyWay, moonTex] = useTexture(
-    ["/textures/6k_stars_milky_way.webp", "/textures/2k_moon.webp"],
+    [withBasePath("/textures/6k_stars_milky_way.webp"), withBasePath("/textures/2k_moon.webp")],
     (t) => {
       for (const tex of Array.isArray(t) ? t : [t]) {
         tex.colorSpace = THREE.SRGBColorSpace;

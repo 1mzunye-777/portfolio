@@ -11,6 +11,7 @@ import {
   PROJECTS_RING_TILT,
   sectionProgress,
 } from "@/lib/journey";
+import { withBasePath } from "@/lib/basePath";
 import { scrollState } from "@/lib/scroll";
 import { makeGlowTexture, makeTextTexture } from "@/lib/textures";
 
@@ -262,16 +263,16 @@ function prepAlbedo(tex: THREE.Texture | THREE.Texture[]) {
   }
 }
 
-useTexture.preload("/textures/4k_earth_daymap.webp");
-useTexture.preload("/textures/4k_earth_nightmap.webp");
-useTexture.preload("/textures/4k_earth_clouds.webp");
-useTexture.preload("/textures/2k_mars.webp");
-useTexture.preload("/textures/2k_neptune.webp");
-useTexture.preload("/textures/4k_sun.webp");
-useTexture.preload("/textures/2k_saturn.webp");
-useTexture.preload("/textures/2k_saturn_ring_alpha.png");
-useTexture.preload("/textures/2k_jupiter.webp");
-useTexture.preload("/textures/2k_moon.webp");
+useTexture.preload(withBasePath("/textures/4k_earth_daymap.webp"));
+useTexture.preload(withBasePath("/textures/4k_earth_nightmap.webp"));
+useTexture.preload(withBasePath("/textures/4k_earth_clouds.webp"));
+useTexture.preload(withBasePath("/textures/2k_mars.webp"));
+useTexture.preload(withBasePath("/textures/2k_neptune.webp"));
+useTexture.preload(withBasePath("/textures/4k_sun.webp"));
+useTexture.preload(withBasePath("/textures/2k_saturn.webp"));
+useTexture.preload(withBasePath("/textures/2k_saturn_ring_alpha.png"));
+useTexture.preload(withBasePath("/textures/2k_jupiter.webp"));
+useTexture.preload(withBasePath("/textures/2k_moon.webp"));
 
 const smoothstep = THREE.MathUtils.smoothstep;
 
@@ -397,9 +398,9 @@ function AboutPlanet() {
 
   const [dayMap, nightMap, cloudMap] = useTexture(
     [
-      "/textures/4k_earth_daymap.webp",
-      "/textures/4k_earth_nightmap.webp",
-      "/textures/4k_earth_clouds.webp",
+      withBasePath("/textures/4k_earth_daymap.webp"),
+      withBasePath("/textures/4k_earth_nightmap.webp"),
+      withBasePath("/textures/4k_earth_clouds.webp"),
     ],
     prepAlbedo
   );
@@ -509,7 +510,7 @@ function AboutPlanet() {
 function ProjectsPlanet() {
   const planetRef = useRef<THREE.Mesh>(null);
 
-  const neptuneMap = useTexture("/textures/2k_neptune.webp", prepAlbedo);
+  const neptuneMap = useTexture(withBasePath("/textures/2k_neptune.webp"), prepAlbedo);
 
   const surfaceMat = useMemo(
     () =>
@@ -594,7 +595,7 @@ function ProjectsPlanet() {
 /* ------------------------------------------------------------------ */
 
 function ContactSun() {
-  const sunTex = useTexture("/textures/4k_sun.webp", prepAlbedo);
+  const sunTex = useTexture(withBasePath("/textures/4k_sun.webp"), prepAlbedo);
 
   const sunMat = useMemo(
     () =>
@@ -711,11 +712,11 @@ function BackgroundPlanets() {
 
   const [saturnMap, saturnRingMap, jupiterMap, moonMap, marsMap] = useTexture(
     [
-      "/textures/2k_saturn.webp",
-      "/textures/2k_saturn_ring_alpha.png",
-      "/textures/2k_jupiter.webp",
-      "/textures/2k_moon.webp",
-      "/textures/2k_mars.webp",
+      withBasePath("/textures/2k_saturn.webp"),
+      withBasePath("/textures/2k_saturn_ring_alpha.png"),
+      withBasePath("/textures/2k_jupiter.webp"),
+      withBasePath("/textures/2k_moon.webp"),
+      withBasePath("/textures/2k_mars.webp"),
     ],
     prepAlbedo
   );

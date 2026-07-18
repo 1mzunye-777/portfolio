@@ -11,6 +11,7 @@ import {
 import type { BloomEffect, ChromaticAberrationEffect } from "postprocessing";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
+import { withBasePath } from "@/lib/basePath";
 import { scrollState } from "@/lib/scroll";
 import { useUIStore } from "@/lib/store";
 import CameraRig from "./CameraRig";
@@ -189,7 +190,7 @@ export default function Experience() {
           {/* HDRI reflections stay in the hero load — set before materials
               compile, so no later shader recompile when models stream in. */}
           <Environment
-            files="/hdri/dikhololo_night_1k.hdr"
+            files={withBasePath("/hdri/dikhololo_night_1k.hdr")}
             environmentIntensity={0.5}
           />
 
